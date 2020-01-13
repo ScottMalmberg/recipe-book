@@ -7,7 +7,7 @@ const uuid = require('uuid');
 module.exports = (data) => {
     const params = {
         TableName: process.env.DYNAMODB_TABLE,
-        Recipe: {
+        Item: {
             id: uuid.v4(),
             createdAt: Date.now(),
             title: data.title,

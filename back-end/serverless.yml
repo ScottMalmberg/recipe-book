@@ -20,18 +20,19 @@ provider:
 
 
 functions:
-  query:
-    handler: handler.query
+  graphql:
+    handler: graphql.graphqlHandler
     events:
       - http:
-          path: query
-          method: get
-          cors: true
-      - http:
-          path: query
+          path: graphql
           method: post
+          cors: true
+          integration: lambda-proxy
+      - http:
+          path: graphql
+          method: get
           cors: true          
-
+          integration: lambda-proxy
 resources:
   Resources:
     recipeTable:
