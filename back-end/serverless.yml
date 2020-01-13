@@ -28,11 +28,7 @@ functions:
           method: post
           cors: true
           integration: lambda-proxy
-      - http:
-          path: graphql
-          method: get
-          cors: true          
-          integration: lambda-proxy
+          
 resources:
   Resources:
     recipeTable:
