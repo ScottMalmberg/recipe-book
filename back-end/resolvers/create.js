@@ -16,5 +16,5 @@ module.exports = (data) => {
         }
     };
     return dynamoDb.put(params).promise()
-        .then(result => params.Recipe)
+        .then(result => params.Item)
 };

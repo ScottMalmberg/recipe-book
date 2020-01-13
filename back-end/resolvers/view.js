@@ -9,5 +9,5 @@ module.exports = (id) => {
         Key: { id }
     };
     return dynamoDb.get(params).promise()
-        .then(result => result.Recipe);
+        .then(result => result.Item);
 };
