@@ -29,10 +29,15 @@ function Recipes() {
   if(error) return <p>Error :(</p>;
 
   return data.recipes.map(({ title, ingredients, instructions }) => (
-      <div>
+      <div className="recipe-card" style={{
+        padding: `1.5rem`,
+        marginBottom: `1rem`,
+        backgroundColor: `#d3d3d347`,
+        borderRadius: `5px`,
+      }}>
           <h1>{title}</h1>
-          <p>{ingredients}</p>
-          <p>{instructions}</p>
+          <p><strong>Ingredients: </strong>{ingredients}</p>
+          <p><strong>Instructions: </strong>{instructions}</p>
       </div>
   ))
 }
@@ -41,14 +46,7 @@ const IndexPage = () => (
   <ApolloProvider client={client}>
     <Layout>
       <SEO title="Home" />
-      <h1>Hi people</h1>
-      <p>Welcome to your new Gatsby site.</p>
-      <p>Now go build something great.</p>
-      <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-        <Image />
-      </div>
       <Recipes />
-      <Link to="/page-2/">Go to page 2</Link>
     </Layout>
   </ApolloProvider>
 )
