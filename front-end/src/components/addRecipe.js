@@ -12,24 +12,23 @@ const ADD_RECIPE = gql`
 `;
 
 const AddRecipe = () => {
-    // handles change and sets state based on the name of the input being changed (e.g. "name")
-    onChange = (e) => this.setState({[e.target.name]: e.target.value});    
+    const [addRecipe, { data }] = useMutation(ADD_RECIPE);
+      
 
     onSubmit = (e) => {
-        
-        const { title, ingredients, instructions } = this.state;
-        // empty catch
-        if(this.state.title === "") {
-            e.preventDefault();
-            return alert("You have to give your masterpiece a title! Try again.")
-        }
-        // stops it from submitting to the file
         e.preventDefault();
-        // passes up the input
-        this.props.addRecipe({ variables: { title: title, ingredients: ingredients, instructions  } })
-        // resets input field
-        this.setState({title: "", ingredients: "", instructions: ""});
+        addRecipe({ variables: { title: title.value, ingredients: ingredients.value, instructions: instructions.value } });
+        title.value, ingredients.value, instructions.value = "";
     }
+
+    return (
+        <form onSubmit={onSubmit()}>
+            <input name="title"></input>
+            <input name="ingredients"></input>
+            <input name="instructions"></input>
+            <button type="submit">Add Recipe</button>
+        </form>
+    );
 }
 
 export default AddRecipe;
