@@ -5,6 +5,8 @@ import { gql } from 'apollo-boost';
 const RECIPES_QUERY = gql`
     {
         recipes {
+            id
+            createdAt
             title
             ingredients
             instructions
@@ -17,8 +19,8 @@ const ViewRecipes = () => {
 
     if(loading) return <p>Loading...</p>;
     if(error) return <p>Error :(</p>;
-
-    return data.recipes.map(({ title, ingredients, instructions }) => (
+    console.log(data);
+    return data.recipes.sort((a,b) => a.createdAt - b.createdAt).map(({ title, ingredients, instructions }) => (
         <div className="recipe-card" style={{
           padding: `1.5rem`,
           marginBottom: `1rem`,
@@ -32,4 +34,5 @@ const ViewRecipes = () => {
     ))
 }
 
+export { RECIPES_QUERY };
 export default ViewRecipes;

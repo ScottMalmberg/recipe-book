@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
+import { RECIPES_QUERY } from './ViewRecipes';
 
 const ADD_RECIPE = gql`
     mutation AddRecipe($title: String! $ingredients: String! $instructions: String!) {
@@ -12,20 +13,41 @@ const ADD_RECIPE = gql`
 `;
 
 const AddRecipe = () => {
+    const [title, setTitle] = useState('');
+    const [ingredients, setIngredients] = useState('');
+    const [instructions, setInstructions] = useState('');
     const [addRecipe, { data }] = useMutation(ADD_RECIPE);
-      
-
-    onSubmit = (e) => {
-        e.preventDefault();
-        addRecipe({ variables: { title: title.value, ingredients: ingredients.value, instructions: instructions.value } });
-        title.value, ingredients.value, instructions.value = "";
-    }
+    
 
     return (
-        <form onSubmit={onSubmit()}>
-            <input name="title"></input>
-            <input name="ingredients"></input>
-            <input name="instructions"></input>
+        <form onSubmit={(e) => {
+            e.preventDefault();
+            addRecipe({ 
+                variables: { title: title, ingredients: ingredients, instructions: instructions }, 
+                refetchQueries: [{ query: RECIPES_QUERY }]
+            });
+            setTitle('');
+            setIngredients('');
+            setInstructions('');
+        }}>
+            <input 
+                name="title" 
+                placeholder="What's your recipe called?"
+                value={title}
+                onChange={e => setTitle(e.target.value)}
+            />
+            <input 
+                name="ingredients" 
+                placeholder="What's in your recipe?"
+                value={ingredients}
+                onChange={e => setIngredients(e.target.value)}
+            />
+            <input 
+                name="instructions" 
+                placeholder="How do you make it?"
+                value={instructions}
+                onChange={e => setInstructions(e.target.value)}
+            />
             <button type="submit">Add Recipe</button>
         </form>
     );

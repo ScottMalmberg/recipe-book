@@ -1,9 +1,7 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import { useMutation } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
 import Recipes from './components/ViewRecipes';
 import AddRecipe from './components/addRecipe';
+import Layout from './components/Layout';
 
 
 
@@ -15,8 +13,10 @@ function App() {
   return (
     
     <div className="App">
-      <Recipes />
-      <AddRecipe />>
+      <Layout>
+        <Recipes />
+        <AddRecipe />
+      </Layout>
     </div>
   );
 }
