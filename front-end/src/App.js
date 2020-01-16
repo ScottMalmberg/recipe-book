@@ -14,8 +14,8 @@ function App() {
     
     <div className="App">
       <Layout>
-        <Recipes />
         <AddRecipe />
+        <Recipes />
       </Layout>
     </div>
   );

@@ -20,7 +20,7 @@ const ViewRecipes = () => {
     if(loading) return <p>Loading...</p>;
     if(error) return <p>Error :(</p>;
     console.log(data);
-    return data.recipes.sort((a,b) => a.createdAt - b.createdAt).map(({ title, ingredients, instructions }) => (
+    return data.recipes.sort((a,b) => b.createdAt - a.createdAt).map(({ title, ingredients, instructions }) => (
         <div className="recipe-card" style={{
           padding: `1.5rem`,
           marginBottom: `1rem`,

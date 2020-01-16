@@ -20,7 +20,7 @@ const Layout = ({children}) => {
                 display: "flex",
                 flexDirection: "column",
                 margin: "1rem auto",
-                maxWidth: "60%",
+                maxWidth: "50%",
             }}>
                 {children}
             </main>
