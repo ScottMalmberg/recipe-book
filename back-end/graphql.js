@@ -3,6 +3,7 @@ const createRecipe = require('./resolvers/create');
 const viewRecipe = require('./resolvers/view');
 const listRecipes = require('./resolvers/list');
 const removeRecipe = require('./resolvers/remove');
+const updateRecipe = require('./resolvers/update');
 
 
 const typeDefs = gql`
@@ -22,6 +23,7 @@ const typeDefs = gql`
     type Mutation {
         addRecipe(title: String!, ingredients: String!, instructions: String!): Recipe
         deleteRecipe(id: String!): String
+        updateRecipe(id: String!, title: String, ingredients: String, instructions: String): Recipe
     }
 `;
 
@@ -32,7 +34,8 @@ const resolvers = {
     },
     Mutation: {
         addRecipe: (parent, args) => createRecipe(args),
-        deleteRecipe: (parent, args) => removeRecipe(args.id)
+        deleteRecipe: (parent, args) => removeRecipe(args.id),
+        updateRecipe: (parent, args) => updateRecipe(args)
     }
 };
 

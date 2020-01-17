@@ -13,7 +13,6 @@ const DeleteRecipe = (id) => {
     const [deleteRecipe, { data }] = useMutation(DELETE_RECIPE);
     const recipeId = id.id;
 
-
     return (
         <button className="btn btn-outline-danger float-right" onClick={() => 
             {if (window.confirm("Are you sure you want to delete this recipe?")) deleteRecipe({ 

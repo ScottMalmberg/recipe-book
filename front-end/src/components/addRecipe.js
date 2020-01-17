@@ -21,7 +21,7 @@ const AddRecipe = () => {
 
     if(!showForm) {
         return(
-            <button type="button" class="btn btn-outline-primary mb-4" onClick={ () => setShowForm(true)}>New Recipe</button>
+            <button type="button" className="btn btn-outline-primary mb-4" onClick={ () => setShowForm(true)}>New Recipe</button>
         );
     }
     else return(
