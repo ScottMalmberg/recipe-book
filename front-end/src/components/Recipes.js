@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
+import DeleteRecipe from './DeleteRecipe';
 
 const RECIPES_QUERY = gql`
     {
@@ -20,13 +21,12 @@ const ViewRecipes = () => {
     if(loading) return <p>Loading...</p>;
     if(error) return <p>Error :(</p>;
     console.log(data);
-    return data.recipes.sort((a,b) => b.createdAt - a.createdAt).map(({ title, ingredients, instructions }) => (
-        <div className="recipe-card" style={{
-          padding: `1.5rem`,
-          marginBottom: `1rem`,
+    return data.recipes.sort((a,b) => b.createdAt - a.createdAt).map(({ id, title, ingredients, instructions }) => (
+        <div className="recipe-card mb-3 p-4" key={ id } style={{
           backgroundColor: `#d3d3d347`,
           borderRadius: `5px`,
         }}>
+            <DeleteRecipe id={ id }/>
             <h1>{title}</h1>
             <p><strong>Ingredients: </strong>{ingredients}</p>
             <p><strong>Instructions: </strong>{instructions}</p>

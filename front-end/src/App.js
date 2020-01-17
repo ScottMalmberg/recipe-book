@@ -1,12 +1,8 @@
 import React from 'react';
-import Recipes from './components/ViewRecipes';
-import AddRecipe from './components/addRecipe';
+import Recipes from './components/Recipes';
+import AddRecipe from './components/AddRecipe';
 import Layout from './components/Layout';
-
-
-
-
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {

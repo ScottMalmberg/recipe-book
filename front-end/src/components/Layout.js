@@ -3,8 +3,7 @@ import React from 'react';
 const Layout = ({children}) => {
     return(
         <div>
-            <header style={{
-                width: "100%",
+            <header className="container-fluid" style={{
                 height: "10vh",
                 backgroundColor: "#002e63",
                 color: "white",
@@ -16,12 +15,7 @@ const Layout = ({children}) => {
                     margin: "0",
                 }}>Recipes</h1>
             </header>
-            <main style={{
-                display: "flex",
-                flexDirection: "column",
-                margin: "1rem auto",
-                maxWidth: "50%",
-            }}>
+            <main className="container my-4">
                 {children}
             </main>
         </div>
