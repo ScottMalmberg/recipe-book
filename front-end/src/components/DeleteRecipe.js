@@ -1,5 +1,4 @@
 import React from 'react';
-import { useMutation } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import { RECIPES_QUERY } from './Recipes';
 
@@ -9,21 +8,18 @@ const DELETE_RECIPE = gql`
     }
 `;
 
-const DeleteRecipe = (id) => {
-    const [deleteRecipe, { data }] = useMutation(DELETE_RECIPE);
-    const recipeId = id.id;
-
+const DeleteRecipe = (props) => {
+   
     return (
-        <button className="btn btn-outline-danger float-right" onClick={() => 
-            {if (window.confirm("Are you sure you want to delete this recipe?")) deleteRecipe({ 
-                variables: { id: recipeId }, 
+        <button className="btn btn-outline-danger float-right mb-3" onClick={() => 
+            {if (window.confirm("Are you sure you want to delete this recipe?")) props.deleteRecipe({ 
+                variables: { id: props.id }, 
                 refetchQueries: [{ query: RECIPES_QUERY }]
             })}
         }>
             Delete</button>
-        
     );
-    
 }
 
 export default DeleteRecipe;
+export {DELETE_RECIPE};
