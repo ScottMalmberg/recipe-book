@@ -24,7 +24,7 @@ const AddRecipe = (props) => {
             e.preventDefault();
             props.addRecipe({ 
                 variables: { title: props.addTitle, ingredients: props.addIngredients, instructions: props.addInstructions }, 
-                refetchQueries: [{ query: RECIPES_QUERY }]
+                refetchQueries: [{ query: RECIPES_QUERY, variables: { filter: props.filter } }]
             });
             props.setTitle('');
             props.setIngredients('');

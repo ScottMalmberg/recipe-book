@@ -14,7 +14,7 @@ const DeleteRecipe = (props) => {
         <button className="btn btn-outline-danger float-right mb-3" onClick={() => 
             {if (window.confirm("Are you sure you want to delete this recipe?")) props.deleteRecipe({ 
                 variables: { id: props.id }, 
-                refetchQueries: [{ query: RECIPES_QUERY }]
+                refetchQueries: [{ query: RECIPES_QUERY, variables: { filter: props.filter } }]
             })}
         }>
             Delete</button>

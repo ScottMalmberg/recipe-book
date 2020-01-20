@@ -19,6 +19,7 @@ const Recipes = (props) => {
     
     if(props.loading) return <p>Loading...</p>;
     if(props.error) return <p>Error :(</p>;
+    if(props.networkStatus === 4) return <p>Refetching...</p>;
 
     return props.data.recipes.sort((a,b) => b.createdAt - a.createdAt).map(({ id, title, ingredients, instructions }) => (
         <div className="recipe-card mb-3 p-4" key={ id } style={{
@@ -27,7 +28,8 @@ const Recipes = (props) => {
         }}>
             <DeleteRecipe 
                 id={ id } 
-                deleteRecipe={props.deleteRecipe} />
+                deleteRecipe={props.deleteRecipe}
+                filter={props.filter} />
             <UpdateRecipe 
                 id={ id } 
                 title={ title } 
@@ -36,16 +38,14 @@ const Recipes = (props) => {
                 filter={ props.filter }
                 />
             <h1 className="mb-3">{title}</h1>
-            <p><strong>Ingredients: </strong>
-                <ul>
-                    {ingredients.split(',').map(i => <li>{i}</li>)}
-                </ul>
-            </p>
-            <p><strong>Instructions: </strong>
-                <ul>
-                    {instructions.replace(/\.\s*(?!.)/, "").split(/\..(?=.)/g).map(i => <li>{i}</li>)}
-                </ul>
-            </p>
+            <p><strong>Ingredients: </strong></p>
+            <ul>
+                {ingredients.split(',').map(i => <li>{i}</li>)}
+            </ul>
+            <p><strong>Instructions: </strong></p>
+            <ul>
+                {instructions.replace(/\.\s*(?!.)/, "").split(/\..(?=.)/g).map(i => <li>{i}</li>)}
+            </ul>
         </div>
     ))
 }

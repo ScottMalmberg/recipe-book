@@ -11,10 +11,12 @@ import Search from './components/Search';
 function App() {
   // Search 
   const [filter, setFilter] = useState('');
+
   
   // Recipes
-  const { loading, error, data, refetch } = useQuery(RECIPES_QUERY, {
+  const { loading, error, data, refetch, networkStatus } = useQuery(RECIPES_QUERY, {
     variables: {filter},
+    notifyOnNetworkStatusChange: true,
   });
 
   // Add Recipe
@@ -27,6 +29,11 @@ function App() {
   // Delete Recipe
   const [deleteRecipe] = useMutation(DELETE_RECIPE);
 
+  const handleChange = (e) => {
+    setFilter(e.target.value);
+    refetch();
+    console.log(data.recipes);
+  }
 
   return (
     
@@ -43,13 +50,15 @@ function App() {
             setInstructions={setInstructions}
             addRecipe={addRecipe}
             showAddForm={showAddForm}
-            setShowAddForm={setShowAddForm} />
+            setShowAddForm={setShowAddForm}
+            filter={filter} />
           </div>
           <div className="col-6">
             <Search 
               filter={filter}
               setFilter={setFilter} 
-              refetch={refetch} />
+              refetch={refetch}
+              handleChange={handleChange} />
           </div>
         </div>
         
@@ -61,7 +70,8 @@ function App() {
           loading={loading}
           error={error}
           data={data}
-          refetch={refetch} />
+          refetch={refetch}
+          networkStatus={networkStatus} />
       </Layout>
     </div>
   );
