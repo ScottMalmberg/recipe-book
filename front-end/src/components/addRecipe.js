@@ -19,7 +19,7 @@ const AddRecipe = (props) => {
             <button type="button" className="btn btn-outline-primary mb-4" onClick={ () => props.setShowAddForm(true)}>New Recipe</button>
         );
     }
-    else return(
+    else return (
         <form className="mb-4" onSubmit={(e) => {
             e.preventDefault();
             props.addRecipe({ 

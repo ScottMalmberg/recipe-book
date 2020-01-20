@@ -1,12 +1,11 @@
-import React, {useState} from 'react'
-import { useQuery } from '@apollo/react-hooks';
+import React from 'react'
 import { gql } from 'apollo-boost';
 import DeleteRecipe from './DeleteRecipe';
 import UpdateRecipe from './EditRecipe';
 
 const RECIPES_QUERY = gql`
-    {
-        recipes {
+    query Recipes($filter: String) {
+        recipes(filter: $filter) {
             id
             createdAt
             title
@@ -20,16 +19,8 @@ const Recipes = (props) => {
     
     if(props.loading) return <p>Loading...</p>;
     if(props.error) return <p>Error :(</p>;
-    const recipeList = props.data.recipes.sort((a,b) => b.createdAt - a.createdAt);
-    
-    if(props.filter !== '') {
-        recipeList.filter(a => a.title.toLowerCase().includes(props.filter));
-        props.refetch();
-        console.log(props.data);
-    }
-  
 
-    return recipeList.map(({ id, title, ingredients, instructions }) => (
+    return props.data.recipes.sort((a,b) => b.createdAt - a.createdAt).map(({ id, title, ingredients, instructions }) => (
         <div className="recipe-card mb-3 p-4" key={ id } style={{
           backgroundColor: `#d3d3d347`,
           borderRadius: `5px`,
@@ -42,6 +33,7 @@ const Recipes = (props) => {
                 title={ title } 
                 ingredients={ ingredients } 
                 instructions={ instructions }
+                filter={ props.filter }
                 />
             <h1>{title}</h1>
             <p><strong>Ingredients: </strong>{ingredients}</p>

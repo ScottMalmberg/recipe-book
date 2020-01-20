@@ -4,19 +4,18 @@ import Recipes, { RECIPES_QUERY } from './components/Recipes';
 import AddRecipe from './components/AddRecipe';
 import { ADD_RECIPE } from './components/AddRecipe';
 import { DELETE_RECIPE } from './components/DeleteRecipe';
-import { UPDATE_RECIPE } from './components/EditRecipe';
 import Layout from './components/Layout';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Search from './components/Search';
 
 
-
-
-
-
 function App() {
+  // Search 
+  const [filter, setFilter] = useState('');
+  
   // Recipes
-  const { loading, error, data, refetch } = useQuery(RECIPES_QUERY);
+  const { loading, error, data, refetch } = useQuery(RECIPES_QUERY, {
+    variables: {filter},
+  });
 
   // Add Recipe
   const [addTitle, setTitle] = useState('');
@@ -28,15 +27,13 @@ function App() {
   // Delete Recipe
   const [deleteRecipe] = useMutation(DELETE_RECIPE);
 
-  // Search 
-  const [filter, setFilter] = useState('');
 
   return (
     
     <div className="App">
       <Layout>
         <div className="row">
-          <div className="col-3">
+          <div className="col-2">
             <AddRecipe 
             addTitle={addTitle} 
             setTitle={setTitle} 
@@ -48,7 +45,7 @@ function App() {
             showAddForm={showAddForm}
             setShowAddForm={setShowAddForm} />
           </div>
-          <div className="col-9">
+          <div className="col-10">
             <Search 
               filter={filter}
               setFilter={setFilter} 

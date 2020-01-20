@@ -17,7 +17,7 @@ const typeDefs = gql`
 
     type Query {
         recipe(id: String!): Recipe
-        recipes: [Recipe]
+        recipes(filter: String): [Recipe]
     }
 
     type Mutation {
@@ -30,7 +30,7 @@ const typeDefs = gql`
 const resolvers = {
     Query: {
         recipe: (parent, args) => viewRecipe(args.id),
-        recipes: (parent, args) => listRecipes()
+        recipes: (parent, args) => listRecipes(args)
     },
     Mutation: {
         addRecipe: (parent, args) => createRecipe(args),

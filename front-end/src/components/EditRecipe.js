@@ -15,7 +15,7 @@ const UPDATE_RECIPE = gql`
 `;
 
 const UpdateRecipe = (props) => {
-    const [editRecipe, { data }] = useMutation(UPDATE_RECIPE);
+    const [editRecipe] = useMutation(UPDATE_RECIPE);
     const [currentTitle, updateTitle] = useState(props.title);
     const [currentIngredients, updateIngredients] = useState(props.ingredients);
     const [currentInstructions, updateInstructions] = useState(props.instructions);
@@ -33,11 +33,8 @@ const UpdateRecipe = (props) => {
             e.preventDefault();
             editRecipe({ 
                 variables: { id: recipeId, title: currentTitle, ingredients: currentIngredients, instructions: currentInstructions }, 
-                refetchQueries: [{ query: RECIPES_QUERY }]
+                refetchQueries: [{ query: RECIPES_QUERY, variables: { filter: props.filter } }]
             });
-            updateTitle('');
-            updateIngredients('');
-            updateInstructions('');
             setShowEditForm(false);
         }}>
             <div class="form-group">
