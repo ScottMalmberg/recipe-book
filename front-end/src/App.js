@@ -33,7 +33,7 @@ function App() {
     <div className="App">
       <Layout>
         <div className="row">
-          <div className="col-2">
+          <div className="col-6">
             <AddRecipe 
             addTitle={addTitle} 
             setTitle={setTitle} 
@@ -45,7 +45,7 @@ function App() {
             showAddForm={showAddForm}
             setShowAddForm={setShowAddForm} />
           </div>
-          <div className="col-10">
+          <div className="col-6">
             <Search 
               filter={filter}
               setFilter={setFilter} 

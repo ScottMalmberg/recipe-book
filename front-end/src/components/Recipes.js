@@ -35,9 +35,17 @@ const Recipes = (props) => {
                 instructions={ instructions }
                 filter={ props.filter }
                 />
-            <h1>{title}</h1>
-            <p><strong>Ingredients: </strong>{ingredients}</p>
-            <p><strong>Instructions: </strong>{instructions}</p>
+            <h1 className="mb-3">{title}</h1>
+            <p><strong>Ingredients: </strong>
+                <ul>
+                    {ingredients.split(',').map(i => <li>{i}</li>)}
+                </ul>
+            </p>
+            <p><strong>Instructions: </strong>
+                <ul>
+                    {instructions.replace(/\.\s*(?!.)/, "").split(/\..(?=.)/g).map(i => <li>{i}</li>)}
+                </ul>
+            </p>
         </div>
     ))
 }
