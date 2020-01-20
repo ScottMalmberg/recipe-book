@@ -17,11 +17,16 @@ const RECIPES_QUERY = gql`
 `;
 
 const Recipes = (props) => {
-    const { loading, error, data } = useQuery(RECIPES_QUERY);
-    if(loading) return <p>Loading...</p>;
-    if(error) return <p>Error :(</p>;
-    const recipeList = data.recipes.sort((a,b) => b.createdAt - a.createdAt);
     
+    if(props.loading) return <p>Loading...</p>;
+    if(props.error) return <p>Error :(</p>;
+    const recipeList = props.data.recipes.sort((a,b) => b.createdAt - a.createdAt);
+    
+    if(props.filter !== '') {
+        recipeList.filter(a => a.title.toLowerCase().includes(props.filter));
+        props.refetch();
+        console.log(props.data);
+    }
   
 
     return recipeList.map(({ id, title, ingredients, instructions }) => (
@@ -29,7 +34,9 @@ const Recipes = (props) => {
           backgroundColor: `#d3d3d347`,
           borderRadius: `5px`,
         }}>
-            <DeleteRecipe id={ id } deleteRecipe={props.deleteRecipe} />
+            <DeleteRecipe 
+                id={ id } 
+                deleteRecipe={props.deleteRecipe} />
             <UpdateRecipe 
                 id={ id } 
                 title={ title } 
