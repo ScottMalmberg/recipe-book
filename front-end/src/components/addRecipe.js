@@ -48,6 +48,7 @@ const AddRecipe = (props) => {
             
             <button className="btn btn-primary" type="submit">Add Recipe</button>
         </form>
+        
     )
 }
 

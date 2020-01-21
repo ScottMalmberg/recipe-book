@@ -11,7 +11,9 @@ import Search from './components/Search';
 function App() {
   // Search 
   const [filter, setFilter] = useState('');
-
+  const handleChange = (e) => {
+    setFilter(e.target.value);
+  }
   
   // Recipes
   const { loading, error, data, refetch, networkStatus } = useQuery(RECIPES_QUERY, {
@@ -28,19 +30,14 @@ function App() {
 
   // Delete Recipe
   const [deleteRecipe] = useMutation(DELETE_RECIPE);
-
-  const handleChange = (e) => {
-    setFilter(e.target.value);
-    refetch();
-    console.log(data.recipes);
-  }
+ 
 
   return (
     
     <div className="App">
       <Layout>
         <div className="row">
-          <div className="col-6">
+          <div className="col-md">
             <AddRecipe 
             addTitle={addTitle} 
             setTitle={setTitle} 
@@ -53,7 +50,7 @@ function App() {
             setShowAddForm={setShowAddForm}
             filter={filter} />
           </div>
-          <div className="col-6">
+          <div className="col-md">
             <Search 
               filter={filter}
               setFilter={setFilter} 
@@ -61,8 +58,6 @@ function App() {
               handleChange={handleChange} />
           </div>
         </div>
-        
-        
         <Recipes 
           deleteRecipe={deleteRecipe}
           filter={filter}
