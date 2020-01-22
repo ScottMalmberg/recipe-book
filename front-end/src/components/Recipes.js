@@ -21,7 +21,7 @@ const Recipes = (props) => {
     if(props.error) return <p>Error :(</p>;
     if(props.networkStatus === 4) return <p>Refetching...</p>;
 
-    return props.data.recipes.sort((a,b) => b.createdAt - a.createdAt).map(({ id, title, ingredients, instructions }) => (
+    return props.data.recipes.sort((a,b) => a.title.localeCompare(b.title)).map(({ id, title, ingredients, instructions }) => (
         <div className="recipe-card mb-3 p-4" key={ id } style={{
           backgroundColor: `#d3d3d347`,
           borderRadius: `5px`,
