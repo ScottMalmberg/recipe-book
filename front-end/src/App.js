@@ -22,9 +22,10 @@ function App() {
   });
 
   // Add Recipe
-  const [addTitle, setTitle] = useState('');
-  const [addIngredients, setIngredients] = useState('');
-  const [addInstructions, setInstructions] = useState('');
+  const [newRecipe, setNewRecipe] = useState({title: '', ingredients: [], instructions: []});
+  // const [addTitle, setTitle] = useState('');
+  // const [addIngredients, setIngredients] = useState('');
+  // const [addInstructions, setInstructions] = useState('');
   const [addRecipe] = useMutation(ADD_RECIPE);
   const [showAddForm, setShowAddForm] = useState(false);
 
@@ -36,37 +37,35 @@ function App() {
     
     <div className="App">
       <Layout>
-        <div className="row">
-          <div className="col-md">
-            <AddRecipe 
-            addTitle={addTitle} 
-            setTitle={setTitle} 
-            addIngredients={addIngredients}
-            setIngredients={setIngredients}
-            addInstructions={addInstructions}
-            setInstructions={setInstructions}
-            addRecipe={addRecipe}
-            showAddForm={showAddForm}
-            setShowAddForm={setShowAddForm}
-            filter={filter} />
-          </div>
-          <div className="col-md">
-            <Search 
-              filter={filter}
-              setFilter={setFilter} 
-              refetch={refetch}
-              handleChange={handleChange} />
-          </div>
-        </div>
-        <Recipes 
-          deleteRecipe={deleteRecipe}
-          filter={filter}
-          setFilter={setFilter}
-          loading={loading}
-          error={error}
-          data={data}
-          refetch={refetch}
-          networkStatus={networkStatus} />
+      <AddRecipe 
+        // addTitle={addTitle} 
+        // setTitle={setTitle} 
+        // addIngredients={addIngredients}
+        // setIngredients={setIngredients}
+        // addInstructions={addInstructions}
+        // setInstructions={setInstructions}
+        newRecipe={newRecipe}
+        setNewRecipe={setNewRecipe}
+        addRecipe={addRecipe}
+        showAddForm={showAddForm}
+        setShowAddForm={setShowAddForm}
+        filter={filter} />  
+        
+      <Search 
+        filter={filter}
+        setFilter={setFilter} 
+        refetch={refetch}
+        handleChange={handleChange} />
+
+      <Recipes 
+        deleteRecipe={deleteRecipe}
+        filter={filter}
+        setFilter={setFilter}
+        loading={loading}
+        error={error}
+        data={data}
+        refetch={refetch}
+        networkStatus={networkStatus} />
       </Layout>
     </div>
   );
