@@ -23,9 +23,6 @@ function App() {
 
   // Add Recipe
   const [newRecipe, setNewRecipe] = useState({title: '', ingredients: [], instructions: []});
-  // const [addTitle, setTitle] = useState('');
-  // const [addIngredients, setIngredients] = useState('');
-  // const [addInstructions, setInstructions] = useState('');
   const [addRecipe] = useMutation(ADD_RECIPE);
   const [showAddForm, setShowAddForm] = useState(false);
 

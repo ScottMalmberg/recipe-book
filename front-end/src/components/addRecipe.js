@@ -105,12 +105,12 @@ const AddRecipe = (props) => {
                 <p><strong>Ingredients: </strong></p>
                 <ul>
                     {props.newRecipe.ingredients !== undefined ? props.newRecipe.ingredients.map(i => 
-                        <li>{i.name}<button className="btn btn-outline-danger remove-btn" onClick={e => removeIngredient(i.id)}>x</button></li>) : ''}
+                        <li className="mb-3">{i.name}<button className="btn btn-outline-danger remove-btn" onClick={e => removeIngredient(i.id)}>x</button></li>) : ''}
                 </ul>
                 <p><strong>Instructions: </strong></p>
                 <ul>
                     {props.newRecipe.instructions !== undefined ? props.newRecipe.instructions.map(i =>  
-                        <li>{i.name}<button className="btn btn-outline-danger remove-btn" onClick={e => removeInstruction(i.id)}>x</button></li>) : ''}
+                        <li className="mb-3">{i.name}<button className="btn btn-outline-danger remove-btn" onClick={e => removeInstruction(i.id)}>x</button></li>) : ''}
                 </ul>
             </div>
         </div>

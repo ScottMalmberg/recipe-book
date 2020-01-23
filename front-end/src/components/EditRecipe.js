@@ -16,11 +16,11 @@ const UPDATE_RECIPE = gql`
 
 const UpdateRecipe = (props) => {
     const [editRecipe] = useMutation(UPDATE_RECIPE);
-    const [currentTitle, updateTitle] = useState(props.title);
-    const [currentIngredients, updateIngredients] = useState(props.ingredients);
-    const [currentInstructions, updateInstructions] = useState(props.instructions);
+    // const [currentTitle, updateTitle] = useState(props.title);
+    // const [currentIngredients, updateIngredients] = useState(props.ingredients);
+    // const [currentInstructions, updateInstructions] = useState(props.instructions);
+    const [updateRecipe, setUpdateRecipe] = useState({title: props.title, ingredients: props.ingredients.split(', '), instructions: props.instructions.split('. ')});
     const [showEditForm, setShowEditForm] = useState(false);
-    const recipeId = props.id;
     
 
     if(!showEditForm) {
@@ -32,24 +32,29 @@ const UpdateRecipe = (props) => {
         <form className="mb-4" onSubmit={(e) => {
             e.preventDefault();
             editRecipe({ 
-                variables: { id: recipeId, title: currentTitle, ingredients: currentIngredients, instructions: currentInstructions }, 
+                variables: { 
+                    id: props.id, 
+                    title: updateRecipe.title, 
+                    ingredients: updateRecipe.ingredients.map(i => i.name).join(", "), 
+                    instructions: updateRecipe.instructions.map(i => i.name).join(". ")
+                }, 
                 refetchQueries: [{ query: RECIPES_QUERY, variables: { filter: props.filter } }]
             });
             setShowEditForm(false);
         }}>
             <div class="form-group">
                 <label for="title">What's your recipe called?</label>
-                <input type="text" name="title" value={currentTitle} onChange={e => updateTitle(e.target.value)} className="form-control" />
+                <input type="text" name="title" value={updateRecipe.title} onChange={e => setUpdateRecipe({...updateRecipe, title: e.target.value})} className="form-control" />
             </div>
 
             <div class="form-group">
                 <label for="ingredients">What's in your recipe?</label>
-                <input type="text" name="ingredients" value={currentIngredients} onChange={e => updateIngredients(e.target.value)} className="form-control" />
+                {/* <input type="text" name="ingredients" onChange={e => updateIngredients(e.target.value)} className="form-control" /> */}
             </div>
 
             <div class="form-group">
                 <label for="instructions">How do you make it?</label>
-                <input type="textarea" name="instructions" value={currentInstructions} onChange={e => updateInstructions(e.target.value)} className="form-control" />
+                {/* <input type="textarea" name="instructions" onChange={e => updateInstructions(e.target.value)} className="form-control" /> */}
             </div>
             
             <button className="btn btn-primary" type="submit">Update Recipe</button>
