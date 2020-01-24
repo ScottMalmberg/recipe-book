@@ -33,8 +33,8 @@ const Recipes = (props) => {
             <UpdateRecipe 
                 id={ id } 
                 title={ title } 
-                ingredients={ ingredients } 
-                instructions={ instructions }
+                ingredients={ ingredients.split(', ') } 
+                instructions={ instructions.split('. ') }
                 filter={ props.filter }
                 />
             <h1 className="mb-3">{title}</h1>

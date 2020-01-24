@@ -35,14 +35,8 @@ function App() {
     <div className="App">
       <Layout>
       <AddRecipe 
-        // addTitle={addTitle} 
-        // setTitle={setTitle} 
-        // addIngredients={addIngredients}
-        // setIngredients={setIngredients}
-        // addInstructions={addInstructions}
-        // setInstructions={setInstructions}
-        newRecipe={newRecipe}
-        setNewRecipe={setNewRecipe}
+        recipe={newRecipe}
+        setRecipe={setNewRecipe}
         addRecipe={addRecipe}
         showAddForm={showAddForm}
         setShowAddForm={setShowAddForm}
