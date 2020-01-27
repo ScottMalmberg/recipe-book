@@ -28,20 +28,23 @@ const UpdateRecipe = (props) => {
 
     const submitRecipeUpdate = (e) => {
         e.preventDefault();
-        editRecipe({ 
-            variables: { 
-                id: props.id, 
-                title: updateRecipe.title, 
-                ingredients: updateRecipe.ingredients.map(i => i.name).join(", "), 
-                instructions: updateRecipe.instructions.map(i => i.name).join(". ")
-            }, 
-            refetchQueries: [{ query: RECIPES_QUERY, variables: { filter: props.filter } }]
-        });
-        setShowEditForm(false);
+        if(props.id !== undefined) {
+            editRecipe({ 
+                variables: { 
+                    id: props.id, 
+                    title: updateRecipe.title, 
+                    ingredients: updateRecipe.ingredients.map(i => i.name).join(", "), 
+                    instructions: updateRecipe.instructions.map(i => i.name).join(". ")
+                }, 
+                refetchQueries: [{ query: RECIPES_QUERY, variables: { filter: props.filter } }]
+            });
+            return setShowEditForm(false);
+        }
+        else return "Error: unknown ID";
     }
     
     if(!showEditForm) {
-        return(
+        return (
             <button className="btn btn-outline-secondary float-right mr-2" onClick={ () => setShowEditForm(true)}>Edit</button>
         );
     }
@@ -52,11 +55,7 @@ const UpdateRecipe = (props) => {
             handleSubmit={submitRecipeUpdate}
             buttonText="Update Recipe"
         />
-        
     );
-
-    
-    
 }
 
 export default UpdateRecipe;

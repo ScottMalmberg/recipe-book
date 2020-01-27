@@ -17,16 +17,19 @@ const AddRecipe = (props) => {
 
     const submitRecipe = (e) => {
         e.preventDefault();
-        props.addRecipe({ 
-            variables: { 
-                title: props.recipe.title, 
-                ingredients: props.recipe.ingredients.map(i => i.name).join(", "), 
-                instructions: props.recipe.instructions.map(i => i.name).join(". ") 
-            }, 
-            refetchQueries: [{ query: RECIPES_QUERY, variables: { filter: props.filter } }]
-        });
-        props.setRecipe({title: '', ingredients: [], instructions: []})
-        props.setShowAddForm(false);
+        if(props.recipe.title !== '' && props.recipe.ingredients !== [] && props.recipe.instructions !== []) {
+            props.addRecipe({ 
+                variables: { 
+                    title: props.recipe.title, 
+                    ingredients: props.recipe.ingredients.map(i => i.name).join(", "), 
+                    instructions: props.recipe.instructions.map(i => i.name).join(". ") 
+                }, 
+                refetchQueries: [{ query: RECIPES_QUERY, variables: { filter: props.filter } }]
+            });
+            props.setRecipe({title: '', ingredients: [], instructions: []})
+            return props.setShowAddForm(false);
+        }
+        else return "Error: missing title, ingredients, or instructions.";
     }
     
     if(!props.showAddForm) {
